@@ -17,4 +17,8 @@ public class Universe {
         }
     } 
 
+    public void changeCellStatus(Location location, boolean newStatus){
+
+    }
+
 }
