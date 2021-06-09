@@ -21,4 +21,40 @@ public class Universe {
         this.cells.get(location.getX()).get(location.getY()).changeStatus(newStatus);
     }
 
+    public Cell getCell(Location location){
+        return this.cells.get(location.getX()).get(location.getY());
+    }
+
+    public ArrayList<Cell> getNeighbors(Location location) {
+        int col = location.getX();
+        int row = location.getY();
+        ArrayList<Cell> neighbors = new ArrayList<Cell>();
+
+        //find all surrounding cell by adding +/- 1 to col and row 
+        for (int colNum = col - 1 ; colNum <= (col + 1) ; colNum +=1  ) {
+            for (int rowNum = row - 1 ; rowNum <= (row + 1) ; rowNum +=1  ) {
+                //if not the center cell 
+                if(! ((colNum == col) && (rowNum == row))) {
+                    //make sure it is within  grid
+                    if(withinGrid (colNum, rowNum)) {
+                        Location neighborsLocation = new Location(colNum, rowNum);
+                        Cell neighborRef = this.getCell(neighborsLocation);
+                        neighbors.add(neighborRef);
+                    }
+                }
+            }
+        }
+        return neighbors;
+    }
+
+    private boolean withinGrid(int x, int y) {
+        if((x < 0) || (y < 0) ) {
+            return false;    //false if row or col are negative
+        }
+        if((x >= WIDTH) || (y >= HEIGHT)) {
+            return false;    //false if row or col are > 75
+        }
+        return true;
+    }
+
 }
