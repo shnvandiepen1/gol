@@ -18,7 +18,7 @@ public class Universe {
     } 
 
     public void changeCellStatus(Location location, boolean newStatus){
-
+        this.cells.get(location.getX()).get(location.getY()).changeStatus(newStatus);
     }
 
 }
