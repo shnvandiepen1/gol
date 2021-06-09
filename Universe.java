@@ -17,6 +17,22 @@ public class Universe {
         }
     } 
 
+    /**
+     * @param location location of cell to be checked
+     * @return if the given cell location should be alive next round
+     */
+    public boolean isAliveNR(Location location){
+        ArrayList<Cell> currentNeighbors = getNeighbors(location);
+        int aliveCellCount = 0;
+        boolean currentCellStatus = getCell(location).getStatus();
+        for(Cell cell : currentNeighbors){
+            if(cell.getStatus()) aliveCellCount++; 
+        }
+        if(!currentCellStatus && aliveCellCount == 3) return true;
+        if(currentCellStatus && (aliveCellCount == 2 || aliveCellCount == 3)) return true;
+        return false;
+    }
+
     public void changeCellStatus(Location location, boolean newStatus){
         this.cells.get(location.getX()).get(location.getY()).changeStatus(newStatus);
     }
