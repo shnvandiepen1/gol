@@ -17,6 +17,17 @@ public class Universe {
         }
     } 
 
+    public boolean[][] getStatusArray(){
+        boolean[][] result = new boolean[WIDTH][HEIGHT];
+        for(int i = 0; i < WIDTH; i++){
+            for(int j = 0; j < HEIGHT; j++){
+                Location loopLocation = new Location(i, j);
+                result[i][j] = this.getCell(loopLocation).getStatus();
+            }
+        }
+        return result;
+    }
+
     /**
      * @param location location of cell to be checked
      * @return if the given cell location should be alive next round
@@ -71,6 +82,10 @@ public class Universe {
             return false;    //false if row or col are > 75
         }
         return true;
+    }
+
+    public int getWidthAndHeight(){
+        return this.WIDTH;
     }
 
 }

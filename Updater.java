@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Updater {
 
     private Universe universe;
@@ -10,6 +12,15 @@ public class Updater {
         this.nextUpdate = new boolean[SIZE][SIZE];
     }
 
+    public void applyUpdates(){
+        for(int i = 0; i < SIZE; i++){
+            for(int j = 0; j < SIZE; j++){
+                Location loopLocation = new Location(i, j);
+                universe.changeCellStatus(loopLocation, nextUpdate[i][j]);
+            }
+        }
+    }
+
     public void tick(){
 
     }
@@ -18,13 +29,13 @@ public class Updater {
         for(int i = 0; i < this.SIZE; i++){
             for(int j = 0; j < this.SIZE; j++){
                 Location loopLocation = new Location(i, j);
-                if(universe.isAliveNR(loopLocation)){
-                    nextUpdate[i][j] = true;
-                } else {
-                    nextUpdate[i][j] = false;
-                }
+                nextUpdate[i][j] = universe.isAliveNR(loopLocation);
             }
         }
+    }
+
+    public boolean[][] getUpdatesArray(){
+        return this.nextUpdate;
     }
 
 }
